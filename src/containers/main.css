@@ -1,0 +1,15 @@
+.main{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    margin-top:16px;
+}
+
+.table{
+    width:80%;
+    margin:0 auto;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 16px;
+}
