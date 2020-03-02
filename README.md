@@ -25,7 +25,7 @@ Deployment instructions:-
 
     In terminal go to your project directory
     * run nodemon start or npm start in backend folder which starts the server
-    * in more terminal tab go to project directory , run "npm starts" which should open a tab in browser
+    * in one more terminal tab go to project directory , run "npm starts" which should open a tab in browser
 
 
 
