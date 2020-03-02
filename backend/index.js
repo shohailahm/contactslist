@@ -13,6 +13,8 @@ const port = process.env.PORT || 5000;
 //configure express server
 const app = express();
 
+//const router = express.Router({mergeParams:true});
+
 //Body Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,4 +22,6 @@ app.use(bodyParser.json());
 //listen on port 5000;
 app.listen(port, () => console.log(`Server running on Port ${port}`));
 var routes = require('./routes'); //importing route
+
+
 routes(app); 

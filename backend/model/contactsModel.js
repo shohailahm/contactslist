@@ -92,6 +92,22 @@ Contact.remove = function(id, result){
             }); 
 };
 
+Contact.search=function(body, result){
+  console.log("body",body);
+  sql.query(`Select * from contacts where email like '%${body.value}%' OR name like '%${body.value}%' OR phone like '%${body.value}%' `, [body], function (err, res) {
+
+             if(err) {
+                 console.log("error: ", err);
+                 result(null, err);
+             }
+             else{
+              console.log("res: ", res);
+              result(null, res);
+             }
+         }); 
+};
+
+
 const checkCache = (id, res) => {
     
     redis.redis_client.get(id, (err, data) => {

@@ -56,10 +56,19 @@ exports.updateContact = function(req, res) {
 
 exports.deleteContact = function(req, res) {
 
-    console.log("delete",req.params);
+   
     Contact.remove( req.params.id, function(err, task) {
     if (err)
       res.send(err);
     res.json({ message: 'Contact successfully deleted' });
   });
 };
+
+  exports.getContact =function(req, res) {
+    Contact.search( req.query, function(err, task) {
+    if (err)
+      res.send(err);
+    res.json(task);
+  });
+  };
+

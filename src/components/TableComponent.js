@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input, message, Popconfirm, Form } from 'antd';
+import { Table, Input, message, Popconfirm, Form, Button } from 'antd';
 import api from '../api';
 
+const { Search } = Input;
 const EditableContext = React.createContext();
 
 const EditableRow = ({ index, ...props }) => {
@@ -85,6 +86,7 @@ const EditableCell = ({
 };
 
 class TableComponent extends React.Component {
+  
   constructor(props) {
     super(props);
     this.columns = [
@@ -123,6 +125,7 @@ class TableComponent extends React.Component {
       dataSource: this.getData(),
       data:[]
     };
+     this.searchRef = React.createRef();
   }
   
   getData=()=>{
@@ -193,6 +196,24 @@ static  getDerivedStateFromProps=(props,state)=>{
    
   };
 
+
+  search=async (val)=>{
+   let results=await api.search(val);
+   if(results && results.length>0){
+    let data=results.map((item)=>{
+      return {key:item.id,...item};
+     });
+     this.setState({dataSource:data});
+   }
+ 
+  }
+
+  reset=()=>{
+    
+    this.setState({dataSource:this.state.data});
+   
+  }
+
   render() {
     const { dataSource } = this.state;
     const components = {
@@ -219,6 +240,19 @@ static  getDerivedStateFromProps=(props,state)=>{
     });
     return (
       <div>
+        
+        <div style={{flexDirection:'row',display:'flex',justifyContent:'center'}}>
+          <Search
+              placeholder="input search text"
+              enterButton="Search"
+              size="medium"
+              ref={this.searchRef}
+              onSearch={value => this.search(value)}
+              style={{width:'30%',alignSelf:'flex-start',margin:10}}
+              allowClear
+          />
+          <Button type="danger" onClick={this.reset}  size="medium" style={{alignSelf:'flex-start',margin:10}}>reset</Button>
+        </div> 
         <Table
           components={components}
           rowClassName={() => 'editable-row'}

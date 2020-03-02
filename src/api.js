@@ -24,10 +24,20 @@ const updateContact=(data)=>{
     .catch((err)=>err)
 }
 
+const search=(data)=>{
+    
+    return axios.get(`http://localhost:5000/search?value=${data}`,{headers:{'Content-Type': 'application/json'}})
+    .then((res)=>res.data)
+    .catch((err)=>err)
+}
+
 export default {
     getContacts,
     submitContact,
     deleteContact,
-    updateContact
+    updateContact,
+    search
+    
+
 
 }

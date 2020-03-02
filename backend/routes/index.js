@@ -1,7 +1,7 @@
 module.exports = function(app) {
     var todoList = require('../controllers/contactsController');
   
-    // todoList Routes
+    // contacts Routes
     app.route('/contacts')
       .get(todoList.getAllContacts)
       .post(todoList.createContact);
@@ -10,4 +10,9 @@ module.exports = function(app) {
       .get(todoList.readContact)
       .put(todoList.updateContact)
       .delete(todoList.deleteContact);
+      
+      app.route('/search').get(todoList.getContact)
+
       };
+
+  
